@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form produto</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+    <form action="/compra/alterar/<%= compra.id_vendas%>" method="post">
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade"value="<%= compra.quantidade %>" required>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+<script src="/script/script.js"></script>
+
+</html>

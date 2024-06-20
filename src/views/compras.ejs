@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compras</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+    <p>Seja bem-vindo(a), <%= nome %>!</p>
+    <button><a href="/logout" style="text-decoration: none; color: inherit;">Sair</a></button>
+    <button><a href="/main2" style="text-decoration: none; color: inherit;">Voltar</a></button>
+    <h1>compras</h1>
+    <table class="table container">
+        <tr>
+            <th>nome do produto</th>
+            <th>quantidade</th>
+            <th>valor unitario</th>
+            <th>Valor total</th>
+            <th>estado do pedido</th>
+            <th>ação</th>
+        </tr>
+        <% lista_de_compras.forEach(item => { %>
+            <tr>
+                <td><%= item.nome %></td>
+
+                <td><%= item.quantidade %></td>
+                <td><%= item.valor_unitario %></td>
+                <td><%= item.valor_total %></td>
+                <td><%= item.estado %></td>
+                <td>
+                    <a href='/compra/confirmar/<%= item.id_vendas %>'><button>confirmar</button></a>
+
+                    <a href='/compra/editar/<%= item.id_vendas %>'><button>editar</button></a>
+
+                    <a href='/compra/deletar/<%= item.id_vendas %>'><button>excluir</button></a>
+
+                </td>
+            </tr>
+        <% }) %> 
+    </table>
+</body>
+<script src="/script/script.js"></script>
+
+</html>

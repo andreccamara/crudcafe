@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+
+<body class="light-theme">
+
+
+    <h1>CAFETERIA DO DEDE</h1>
+    <p>Seja bem-vindo(a), <%= nome %>!</p>
+    <button><a href="/logout" style="text-decoration: none; color: inherit;">Sair</a></button>
+    <button id="theme-toggle">Dark Mode</button>
+    <button><a href="/compras/listar" style="text-decoration: none; color: inherit;">minhas compras</a></button>
+
+    <table class="table container">
+        <tr>
+            <th>Número</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Ações</th>
+        </tr>
+        <% produtos.forEach(item => { %>
+            <tr>
+                <td><%= item.id_produtos %></td>
+                <td><%= item.nome %></td>
+                <td><%= item.descricao %></td>
+                <td><%= item.valor %></td>
+                <td>
+                    <a href='/comprar/form/<%= item.id_produtos %>'><button>comprar</button></a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+<script src="/script/script.js"></script>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Compras</title>
+    <link rel="stylesheet" href="/css/form_compras.css">
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+    <div class="form-container">
+        <form action="/comprar/comprar/<%= venda.id_produtos%>" method="post">
+            <p><strong><%= venda.nome %></strong></p>
+            <p><strong>Descrição:</strong><br> <%= venda.descricao %></p>
+            <p><strong>Valor:</strong><br> R$ <span id="valor"><%= venda.valor %></span></p>
+            <label for="quantidade">Quantidade:</label>
+            <input id="quantidade" type="number" name="quantidade">
+            <input type="submit" value="Cadastrar">
+        </form>
+    </div>
+</body>
+<script src="/script/script.js"></script>
+
+</html>
