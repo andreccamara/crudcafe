@@ -11,8 +11,24 @@
 
 <body class="light-theme">
     <h1>CAFETERIA DO DEDE</h1>
+    <h1>editar produto</h1>
+
+    <!-- navbar -->
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main">Produtos</a></button>
+            <button><a href="/produto/form">cadastrar produto</a></button>
+            <img src="" alt="">
+        </div>
+    </nav>
+
+<div class="form-container">
     <form action="/produto/alterar/<%= produtos.id_produtos%>" method="post">
 
+        
         <label for="nome">Nome:</label>
         <input type="text" name="nome" value="<%= produtos.nome %>" required>
 
@@ -22,9 +38,14 @@
         <label for="valor">Valor:</label>
         <input type="number" name="valor" step="0.01" value="<%= produtos.valor %>" required>
 
+        
+        <label for="imagem">Imagem:</label>
+        <input type="file" name="imagem" accept="image/*">
+
         <input type="submit" value="Cadastrar">
-    </form>
+    </form></div>
 </body>
 <script src="/script/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

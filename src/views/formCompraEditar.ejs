@@ -11,14 +11,45 @@
 
 <body class="light-theme">
     <h1>CAFETERIA DO DEDE</h1>
-    <form action="/compra/alterar/<%= compra.id_vendas%>" method="post">
+    
+    <!-- navbar -->
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main2">Produtos</a></button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <img src="" alt="">
+        </div>
+    </nav>
 
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" name="quantidade"value="<%= compra.quantidade %>" required>
 
-        <input type="submit" value="Cadastrar">
-    </form>
+    <div class="form-container">
+
+        <form action="/compra/alterar/<%= compra.id_vendas%>" method="post">
+            <% if (compra.imagem) { %>
+                <img src="/uploads/<%= compra.imagem %>" class="produto-imagem" alt="produto">
+                <% } else { %>
+                    <span>Sem imagem</span>
+                    <% } %>
+                        <p><strong>nome: 
+                                <%= compra.nome %>
+                            </strong></p>
+                        <p><strong>Descrição:</strong>
+                            <%= compra.descricao %>
+                        </p>
+                        <p><strong>Valor:</strong> R$ <span id="valor">
+                                <%= compra.valor %>
+                            </span></p>
+                        <label for="quantidade"> <strong>Quantidade:</strong></label>
+                        <input type="number" name="quantidade" value="<%= compra.quantidade %>" required>
+                        <input type="submit" value="editar compras">
+
+        </form>
+
 </body>
+
 <script src="/script/script.js"></script>
 
 </html>

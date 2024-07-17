@@ -30,9 +30,9 @@ module.exports = {
                 });
         });
     },
-    buscarCompras: () => {
+    buscarCompras: (id_usuario) => {
         return new Promise((resolve, reject) => {
-            id_usuario = session.id_cliente
+            console.log(id_usuario)
             conexao.query('SELECT * FROM vendas v join produtos p on v.id_produtos=p.id_produtos where id_usuarios = ?', [id_usuario], (error, results) => {
                 if (error) {
                     console.log(erro)
@@ -67,7 +67,7 @@ module.exports = {
 
     editar: (id) => {
         return new Promise((resolve, reject) => {
-            conexao.query('SELECT * FROM vendas WHERE id_vendas = ?',
+            conexao.query('SELECT * FROM vendas v join produtos p on v.id_produtos = p.id_produtos WHERE id_vendas = ?',
                 [id],
                 (error, results) => {
                     if (error) { reject(error); return; }

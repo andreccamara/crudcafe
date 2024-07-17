@@ -71,3 +71,8 @@ body.dark-theme h1
 .form-container input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.produto-imagem {
+    max-width: 100px; /* Defina o tamanho máximo da imagem conforme necessário */
+    height: auto;
+}

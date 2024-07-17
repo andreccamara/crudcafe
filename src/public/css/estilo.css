@@ -1,9 +1,12 @@
+/* corpo */
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
+    padding-top: 60px;
+    /* Ajuste para compensar a altura da navbar fixa */
 }
 
 body.light-theme {
@@ -13,30 +16,41 @@ body.light-theme {
 body.dark-theme {
     background-color: black;
 }
+
 body.dark-theme th,
 body.dark-theme tr:nth-child(even),
 body.dark-theme h1,
+body.dark-theme caption,
 body.dark-theme p,
-body.dark-theme label{
+body.dark-theme label {
     background-color: black;
     color: white;
 }
+
 body.dark-theme tr:nth-child(odd) {
     background-color: #3d3d3d;
     color: white;
 }
 
 h1 {
+    color: black;
+}
+
+caption {
+    
     color: #333;
 }
 
+/* tabelas */
 table {
-    width: 100%;
-    border-collapse: collapse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #999999;
     padding: 8px;
 }
 
@@ -52,6 +66,8 @@ tr:nth-child(odd) {
     background-color: #fff;
 }
 
+/* botões */
+
 button {
     margin: 5px;
     padding: 10px 20px;
@@ -59,10 +75,123 @@ button {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+
+/* navbar */
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 60px;
+    /* Ajuste para compensar a altura da navbar fixa */
+}
+
+body.light-theme .navbar {
+    background-color: #333;
+
+}
+
+.navbar {
+    width: 100%;
+    background-color: rgb(163, 163, 163);
+
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    /* Exemplo de largura máxima para a navbar */
+    padding: 0 20px;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navbar button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar button:hover {
+    background-color: #0056b3;
+}
+
+.hamburger {
+    display: none;
+
+}
+
+
+@media (max-width: 600px) {
+    .navbar {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* .navbar-links {
+        display: none; 
+    }
+
+    .hamburger {
+        display: flex;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: black;
+        cursor: pointer;
+        justify-content: center; 
+        // Centraliza horizontalmente
+        align-items: center; 
+        // Centraliza verticalmente
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .navbar-links.show {
+        display: flex;
+    } */
+}
+
+
+
+
+/* formulario */
+.form-container {
+    display: flex;
+    justify-content: center;
+    color: ;
 }
 
 form {
@@ -70,11 +199,18 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    width: 30%;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 25px  #333 ;
+    margin-bottom: 100px;
 }
 
 label {
     margin-top: 10px;
-    color: #333;
+    color: black;
 }
 
 input {
@@ -99,8 +235,7 @@ input[type="submit"]:hover {
 }
 
 .produto-imagem {
-    max-width: 100px; /* Defina o tamanho máximo da imagem conforme necessário */
+    max-width: 100px;
+    /* Defina o tamanho máximo da imagem conforme necessário */
     height: auto;
 }
-
-

@@ -6,11 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Compras</title>
     <link rel="stylesheet" href="/css/form_compras.css">
+    <link rel="stylesheet" href="/css/estilo.css">
 </head>
 
 <body class="light-theme">
     <h1>CAFETERIA DO DEDE</h1>
+
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main2" style="text-decoration: none; color: inherit;">Produtos</a></button>
+            <button><a href="/compras/listar" style="text-decoration: none; color: inherit;">Minhas Compras</a></button>
+            <img src="" alt="">
+        </div>
+    </nav>
+
     <div class="form-container">
+        <% if (venda.imagem) { %>
+            <img src="/uploads/<%= venda.imagem %>" class="produto-imagem" alt="produto">
+        <% } else { %>
+            <span>Sem imagem</span>
+        <% } %>
         <form action="/comprar/comprar/<%= venda.id_produtos%>" method="post">
             <p><strong><%= venda.nome %></strong></p>
             <p><strong>Descrição:</strong><br> <%= venda.descricao %></p>

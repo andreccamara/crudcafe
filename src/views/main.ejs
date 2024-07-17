@@ -11,16 +11,26 @@
 
 <body class="light-theme">
 
-
+    <!-- TITULOS -->
     <h1>CAFETERIA DO DEDE</h1>
-    <p>Seja bem-vindo(a), <%= nome %>!</p>
+    <p>Seja bem-vindo(a), admin <%= nome %>!</p>
 
-    <button id="theme-toggle">Dark Mode</button>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main">Produtos</a></button>
+            <button><a href="/produto/form">cadastrar produto</a></button>
+            <img src="" alt="">
+        </div>
+    </nav>
 
-    <button><a href="/produto/form" style="text-decoration: none; color: inherit;">Cadastrar produto</a></button>
-    <button><a href="/logout" style="text-decoration: none; color: inherit;">Sair</a></button>
+
     <table class="table container">
-    
+        <caption>PRODUTOS:</caption>
+
         <tr>
             <th>Número</th>
             <th>Nome</th>
@@ -29,25 +39,33 @@
             <th>Imagem</th>
             <th>Ações</th>
         </tr>
-        <% produtos.forEach(item => { %>
+        <% produtos.forEach(item=> { %>
             <tr>
-                <td><%= item.id_produtos %></td>
-                <td><%= item.nome %></td>
-                <td><%= item.descricao %></td>
-                <td><%= item.valor %></td>
+                <td>
+                    <%= item.id_produtos %>
+                </td>
+                <td>
+                    <%= item.nome %>
+                </td>
+                <td>
+                    <%= item.descricao %>
+                </td>
+                <td>
+                    <%= item.valor %>
+                </td>
                 <td>
                     <% if (item.imagem) { %>
                         <img src="/uploads/<%= item.imagem %>" class="produto-imagem" alt="produto">
-                    <% } else { %>
-                        <span>Sem imagem</span>
-                    <% } %>
+                        <% } else { %>
+                            <span>Sem imagem</span>
+                            <% } %>
                 </td>
                 <td>
                     <a href='/produto/editar/<%= item.id_produtos %>'><button>Editar</button></a>
-                    <a href="/produto/deletar/<%= item.id_produtos %>"><button>Excluir</button></a> 
+                    <a href="/produto/deletar/<%= item.id_produtos %>"><button>Excluir</button></a>
                 </td>
             </tr>
-        <% }) %>
+            <% }) %>
     </table>
     <script src="/script/script.js"></script>
 
