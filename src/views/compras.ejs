@@ -13,13 +13,17 @@
     <p>Seja bem-vindo(a), <%= nome %>!</p>
 
     <nav class="navbar">
+        <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
         <div class="navbar-links">
             <button class="logout"><a href="/logout">Sair</a></button>
             <button id="theme-toggle">Dark Mode</button>
-            <button><a href="/main2" style="text-decoration: none; color: inherit;">Produtos</a></button>
-            <button><a href="/compras/listar" style="text-decoration: none; color: inherit;">Minhas Compras</a></button>
-            <img src="" alt="">
+            <button><a href="/main2">Produtos</a></button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
         </div>
     </nav>
 
@@ -59,10 +63,17 @@
                     <%= item.estado %>
                 </td>
                 <td>
-                    <button
-                        onclick="confirmAction('/compra/confirmar/<%= item.id_vendas %>', 'confirmar')">confirmar</button>
-                    <button onclick="confirmAction('/compra/editar/<%= item.id_vendas %>', 'editar')">editar</button>
-                    <button onclick="confirmAction('/compra/deletar/<%= item.id_vendas %>', 'excluir')">excluir</button>
+                    <% if (item.estado !== "confirmado") { %>
+                        <button
+                            onclick="confirmAction('/compra/confirmar/<%= item.id_vendas %>', 'confirmar')">confirmar</button>
+                        <button
+                            onclick="confirmAction('/compra/editar/<%= item.id_vendas %>', 'editar')">editar</button>
+                        <button
+                            onclick="confirmAction('/compra/deletar/<%= item.id_vendas %>', 'excluir')">excluir</button>
+                            <% } else { %>
+                                <button onclick="viewAction('/compra/ver/<%= item.id_vendas %>')">ver</button>
+                            <% } %>
+
                 </td>
             </tr>
             <% }) %>

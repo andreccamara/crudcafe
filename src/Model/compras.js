@@ -4,25 +4,21 @@ const session = require('express-session');
 
 
 module.exports = {
-    paginaComprar: (id_produto, id_cliente) => {
+    paginaComprar: (id_produto) => {
         return new Promise((resolve, reject) => {
             conexao.query('SELECT * FROM produtos WHERE id_produtos = ?',
                 [id_produto],
                 (error, results) => {
                     if (error) { reject(error); return; }
-                    console.log('entrou no model')
-
                     resolve(results[0])
                 });
         });
     },
-    comprar: (id_produto, quantidade) => {
+    comprar: (id_produto, quantidade, valor, id_usuario) => {
         return new Promise((resolve, reject) => {
-            let valor = session.valor
             let total = valor * Number(quantidade)
-            let id_usuarios = session.id_cliente
             conexao.query('INSERT into vendas (id_produtos, quantidade, valor_total ,valor_unitario, id_usuarios) values(?,?,?,?,?)',
-                [id_produto, quantidade, total, valor, id_usuarios],
+                [id_produto, quantidade, total, valor, id_usuario],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     console.log("Sucesso ao cadastrar!!")

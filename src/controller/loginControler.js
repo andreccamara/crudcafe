@@ -48,16 +48,46 @@ module.exports = {
             res.redirect('/');
         });
     },
-    
-    main: async (req, res) => {  
-        const produtos = await produto.buscarProdutos(); 
-        res.render('main', { nome: req.session.nome, produtos });
+
+    main: async (req, res) => {
+        try {
+            const produtos = await produto.buscarProdutos();
+            res.render('administracao', { nome: req.session.nome, produtos, categoria: req.session.categoria });
+        } catch (error) {
+            console.error('Erro ao buscar produtos:', error);
+            res.status(500).send('Erro ao carregar a página principal.');
+        }
     },
-    
-    
-    main2: async (req, res) => {  
-        const produtos = await produto.buscarProdutos() 
-        res.render('main2', { nome: req.session.nome, produtos });
+
+    formCadastrarUsuario: (req, res) => {
+        res.render('formCadastrarUsuario', { mensagem: null});
+    },
+
+
+    cadastrarusuario: async (req, res) => {
+        const { nome, email, senha } = req.body;
+        try {
+            const resultado = await login.verificarEmailEInserir(nome, email, senha);
+            // console.log('cadastrar usuario controler')
+            if (resultado.sucesso) {
+                res.redirect('/'); // Redireciona para a página de login após o registro bem-sucedido
+            } else {
+                res.render('formCadastrarUsuario', { mensagem: resultado.mensagem }); // Renderiza a página de registro com a mensagem de erro
+            }
+        } catch (error) {
+            console.error('Erro ao registrar usuário:', error);
+            res.render('formCadastrarUsuario', { mensagem: 'Erro ao registrar usuário.' });
+        }
+    },
+
+    main2: async (req, res) => {
+        try {
+            const produtos = await produto.buscarProdutos()
+            res.render('produtos', { nome: req.session.nome, produtos });
+        } catch (error) {
+            console.error('Erro ao buscar produtos:', error);
+            res.status(500).send('Erro ao carregar a página principal.');
+        }
     }
 
 }

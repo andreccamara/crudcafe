@@ -9,16 +9,32 @@ const compraController = require('../controller/compraControler');
 // middlewares
 const { isAuthenticated, isAdmin } = require('../middlewares/authMiddleware');
 
+// Rotas
+
+// renderizar pagina aleatoria
+router.get('/pagina/:page', (req, res) => {
+    const page = req.params.page;
+    res.render(page);
+});
+
+
 // Rotas públicas
+// login
 router.get('/', homeController.home);
 router.post('/login', loginController.autenticacao);
 
 
-// Rotas protegidas por autenticação
+// cadastrar novo usuario
+ router.get('/formCadastrarNovoUsuario', loginController.formCadastrarUsuario);
+
+ router.post('/cadastrar/usuario', loginController.cadastrarusuario);
+
+
 // Rotas de login
 router.get('/logout', loginController.logout);
-router.get('/main', loginController.main);
-router.get('/main2', isAuthenticated, loginController.main2);
+router.get('/main', isAuthenticated, isAdmin, loginController.main);
+// Rota protegida por autenticação
+router.get('/main2', loginController.main2);
 
 // Rota de compra
 router.get('/compras/listar', isAuthenticated, compraController.comprasListar);
@@ -33,6 +49,8 @@ router.get('/produto/deletar/:id_produto', isAuthenticated, isAdmin, produtoCont
 
 // Rotas protegidas por autenticação
 // compras
+router.get('/compra/form/:id_produto', isAuthenticated, compraController.comprarform);
+router.post('/compra/compra/:id_produto', isAuthenticated, compraController.comprarProduto);
 router.get('/compra/confirmar/:id', isAuthenticated, compraController.confirmarCompra);
 router.get('/compra/editar/:id_venda', isAuthenticated, compraController.editarCompra);
 router.post('/compra/alterar/:id_venda', isAuthenticated, compraController.alterarCompra);

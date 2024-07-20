@@ -15,18 +15,22 @@
 
     <!-- navbar -->
     <nav class="navbar">
+        <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+    
+        <!-- Links da Navbar -->
         <div class="navbar-links">
             <button class="logout"><a href="/logout">Sair</a></button>
             <button id="theme-toggle">Dark Mode</button>
             <button><a href="/main">Produtos</a></button>
-            <button><a href="/produto/form">cadastrar produto</a></button>
-            <img src="" alt="">
+            <button><a href="/produto/form">Cadastrar produto</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
         </div>
     </nav>
 
 <div class="form-container">
-    <form action="/produto/alterar/<%= produtos.id_produtos%>" method="post">
+    <form action="/produto/alterar/<%= produtos.id_produtos%>" method="post" enctype="multipart/form-data">
 
         
         <label for="nome">Nome:</label>

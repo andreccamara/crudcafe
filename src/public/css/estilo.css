@@ -20,12 +20,19 @@ body.dark-theme {
 body.dark-theme th,
 body.dark-theme tr:nth-child(even),
 body.dark-theme h1,
-body.dark-theme caption,
-body.dark-theme p,
-body.dark-theme label {
+body.dark-theme caption
+{
     background-color: black;
     color: white;
 }
+
+body.dark-theme p,
+body.dark-theme label
+{
+    color: white;
+
+}
+
 
 body.dark-theme tr:nth-child(odd) {
     background-color: #3d3d3d;
@@ -36,18 +43,31 @@ h1 {
     color: black;
 }
 
+/* tabelas */
+
 caption {
     
     color: #333;
 }
 
-/* tabelas */
 table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    display: table; /* Define o display da tabela como table para comportar corretamente o caption */
 }
+
+caption {
+    caption-side: top; /* Certifica-se de que o caption está no topo da tabela */
+    text-align: left;  /* Alinha o texto do caption à esquerda */
+    font-weight: bold; /* (Opcional) Torna o texto em negrito para melhor visibilidade */
+    margin-bottom: 10px; /* (Opcional) Adiciona espaço abaixo do caption para separá-lo da tabela */
+}
+
 
 th, td {
     border: 1px solid #999999;
@@ -66,7 +86,31 @@ tr:nth-child(odd) {
     background-color: #fff;
 }
 
+.produto-imagem {
+    max-width: 100px;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .table {
+        font-size: 14px; /* Reduz o tamanho da fonte */
+    }
+
+    .table th, .table td {
+        padding: 5px; /* Reduz o padding das células */
+    }
+
+    .table img.produto-imagem {
+        max-width: 50px; /* Reduz o tamanho das imagens */
+    }
+}
+
+
 /* botões */
+
+h4{
+    background-color: red;
+}
 
 button {
     margin: 5px;
@@ -78,6 +122,11 @@ button {
     border-radius: 5px;
 }
 
+button a {
+    text-decoration: none;
+    color: inherit;
+}
+
 button:hover {
     background-color: #0056b3;
 }
@@ -85,54 +134,55 @@ button:hover {
 
 /* navbar */
 
-
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    padding-top: 60px;
-    /* Ajuste para compensar a altura da navbar fixa */
+.hamburger {
+    display: none;
 }
 
 body.light-theme .navbar {
-    background-color: #333;
+    background-color: #3d3a9a;
 
 }
-
+/* Estilos gerais para a navbar */
 .navbar {
     width: 100%;
-    background-color: rgb(163, 163, 163);
-
+    background-color: rgb(218, 218, 218);
     z-index: 1000;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
+    padding: 10px 0; /* Padding para telas grandes */
 }
 
+/* Contêiner da navbar */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
     max-width: 1200px;
-    /* Exemplo de largura máxima para a navbar */
+    display: flex;
+    justify-content: space-between; /* Ajusta o espaço entre os itens e a logo */
+    align-items: center;
     padding: 0 20px;
+    position: relative; /* Para posicionar a imagem à direita */
 }
 
+/* Links da navbar */
 .navbar-links {
     display: flex;
-    gap: 20px;
+    gap: 20px; /* Espaço entre os botões */
+    justify-content: center; /* Centraliza os botões */
 }
 
+/* Estilos dos botões */
 .navbar button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 20px; /* Padding dos botões */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 16px; /* Tamanho da fonte dos botões */
+    border-radius: 5px; /* Raio da borda dos botões */
 }
 
 .navbar button a {
@@ -144,44 +194,44 @@ body.light-theme .navbar {
     background-color: #0056b3;
 }
 
-.hamburger {
-    display: none;
-
+/* Estilos da imagem */
+.logo-imagem {
+    max-width: 50px; /* Tamanho máximo da imagem */
+    height: auto;
+    position: absolute;
+    right: 20px; /* Espaço à direita da imagem */
 }
 
-
+/* Estilos para dispositivos móveis */
 @media (max-width: 600px) {
-    .navbar {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+    .navbar-links {
+        display: none; /* Oculta os links em telas pequenas */
+        flex-direction: column; /* Alinha os botões verticalmente */
+        gap: 10px; /* Reduz o espaço entre os botões */
     }
 
-    /* .navbar-links {
-        display: none; 
+    .navbar-links.show {
+        display: flex; /* Mostra os links quando a classe 'show' estiver presente */
     }
 
     .hamburger {
-        display: flex;
+        display: flex; /* Exibe o botão hambúrguer */
         font-size: 24px;
         background: none;
         border: none;
         color: black;
         cursor: pointer;
-        justify-content: center; 
-        // Centraliza horizontalmente
-        align-items: center; 
-        // Centraliza verticalmente
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center; /* Centraliza verticalmente */
         position: absolute;
         top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 20px; /* Alinhado à esquerda com algum espaço */
     }
-    .navbar-links.show {
-        display: flex;
-    } */
+
+    .logo-imagem {
+        position: static; /* Remove o posicionamento absoluto */
+        margin-top: 10px; /* Espaço acima da imagem */
+    }
 }
 
 
@@ -191,7 +241,8 @@ body.light-theme .navbar {
 .form-container {
     display: flex;
     justify-content: center;
-    color: ;
+    align-items: center;
+    
 }
 
 form {
@@ -206,6 +257,13 @@ form {
     border-radius: 25px;
     box-shadow: 5px 5px 25px  #333 ;
     margin-bottom: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
+    min-width: 300px;
+}
+
+body.dark-theme form{
+    background-color: rgb(87, 107, 102);
 }
 
 label {
@@ -234,8 +292,4 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.produto-imagem {
-    max-width: 100px;
-    /* Defina o tamanho máximo da imagem conforme necessário */
-    height: auto;
-}
+

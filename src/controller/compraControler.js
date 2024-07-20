@@ -8,7 +8,7 @@ module.exports = {
         const id_produto = req.params.id_produto
         try {
             const venda = await compras.paginaComprar(id_produto);
-            session.valor = venda.valor
+            req.session.valor=venda.valor
             res.render('formComprar', { venda })
         } catch (error) {
             console.error('Erro:', error);
@@ -19,7 +19,9 @@ module.exports = {
     comprarProduto: async (req, res) => {
         let id_produto = req.params.id_produto
         let quantidade = req.body.quantidade
-        await compras.comprar(id_produto, quantidade)
+        let valor = req.session.valor
+        let id_usuario = req.session.id_usuario
+        await compras.comprar(id_produto, quantidade, valor, id_usuario)
         return res.redirect('/compras/listar')
     },
     //listar compras

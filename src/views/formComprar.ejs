@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Compras</title>
-    <link rel="stylesheet" href="/css/form_compras.css">
+    <!-- <link rel="stylesheet" href="/css/form_compras.css"> -->
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 
@@ -13,31 +13,47 @@
     <h1>CAFETERIA DO DEDE</h1>
 
     <nav class="navbar">
+        <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
         <div class="navbar-links">
             <button class="logout"><a href="/logout">Sair</a></button>
             <button id="theme-toggle">Dark Mode</button>
-            <button><a href="/main2" style="text-decoration: none; color: inherit;">Produtos</a></button>
-            <button><a href="/compras/listar" style="text-decoration: none; color: inherit;">Minhas Compras</a></button>
-            <img src="" alt="">
+            <button><a href="/main2">Produtos</a></button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
         </div>
     </nav>
 
+
     <div class="form-container">
-        <% if (venda.imagem) { %>
-            <img src="/uploads/<%= venda.imagem %>" class="produto-imagem" alt="produto">
-        <% } else { %>
-            <span>Sem imagem</span>
-        <% } %>
-        <form action="/comprar/comprar/<%= venda.id_produtos%>" method="post">
-            <p><strong><%= venda.nome %></strong></p>
-            <p><strong>Descrição:</strong><br> <%= venda.descricao %></p>
-            <p><strong>Valor:</strong><br> R$ <span id="valor"><%= venda.valor %></span></p>
-            <label for="quantidade">Quantidade:</label>
-            <input id="quantidade" type="number" name="quantidade">
+        <form action="/compra/compra/<%= venda.id_produtos%>" method="post">
+            
+            <div>
+                <% if (venda.imagem) { %>
+                    <img src="/uploads/<%= venda.imagem %>" class="produto-imagem" alt="produto">
+                    <% } else { %>
+                        <span>Sem imagem</span>
+                        <% } %>
+            </div>
+            
+            <label>
+                  produto: <br>  <%= venda.nome %>
+                </label>
+
+            <label> R$ <span name="valor" id="valor">
+                    <%= venda.valor %>
+                </span>
+                <br>
+                <br>
+            <label for="quantidade">Quantidade:</label> <br>
+            <input id="quantidade" type="number" name="quantidade"> <br>
             <input type="submit" value="Cadastrar">
         </form>
     </div>
+
 </body>
 <script src="/script/script.js"></script>
 

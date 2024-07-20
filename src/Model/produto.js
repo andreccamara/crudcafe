@@ -5,7 +5,6 @@ const session = require('express-session');
 
 module.exports = {
     inserirProdutos: (descricao, nome, valor, imagem) => {
-        console.log('model');
         return new Promise((resolve, reject) => {
             let query = 'INSERT INTO produtos (descricao, nome, valor';
             let values = [descricao, nome, valor];
@@ -28,7 +27,33 @@ module.exports = {
             });
         });
     },
+    alterar: (id_produto, nome, descricao,valor,imagem) => {
+        console.log('ert')
+        console.log(nome, descricao, valor, imagem, id_produto)
+        return new Promise((resolve, reject) => {
 
+        let query = 'UPDATE produtos SET nome = ? , descricao = ? , valor = ? ' 
+        let queryWhere ='WHERE id_produtos = ?';
+        let values = [nome, descricao, valor]
+
+        // Verifica se imagem foi fornecida
+        if (imagem) {
+            query += ', imagem = ? ';
+            values.push(imagem);
+        } else { }
+        query += queryWhere
+        values.push(id_produto)
+        conexao.query(query, values, (error, results) => {
+            if (error) {
+                reject(new Error('Erro ao editar produto no banco de dados:'));
+                return;
+            }
+            console.log("Sucesso ao editar!!");
+            resolve(results);
+        });
+
+        });
+    },
     buscarProdutos: () => {
         return new Promise((resolve, reject) => {
             conexao.query('SELECT * FROM produtos', (error, results) => {
@@ -36,7 +61,7 @@ module.exports = {
                     reject(new Error('Something went wrong'));
                     return;
                 }
-                console.log("Sucesso ao listar produtos!!");
+                // console.log("Sucesso ao listar produtos!!");
                 resolve(results);
             });
         });
@@ -52,17 +77,7 @@ module.exports = {
                 });
         });
     },
-    alterar: (id_produto, nome, descricao,valor) => {
-        return new Promise((resolve, reject) => {
-            conexao.query('UPDATE produtos SET nome = ? , descricao = ? , valor = ? WHERE id_produtos = ?',
-                [nome, descricao, valor, id_produto],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    console.log("Sucesso ao editar!!")
-                    resolve(results)
-                });
-        });
-    },
+    
 
     delete: (id_produto) => 
     {
