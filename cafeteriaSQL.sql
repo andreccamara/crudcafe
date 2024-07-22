@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/07/2024 às 23:11
+-- Tempo de geração: 23/07/2024 às 00:26
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -24,22 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `categoria`
+-- Estrutura para tabela `categorias`
 --
 
-CREATE TABLE `categoria` (
+CREATE TABLE `categorias` (
   `id` int(1) DEFAULT NULL,
   `cargo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `categoria`
---
-
-INSERT INTO `categoria` (`id`, `cargo`) VALUES
-(1, 'administrador'),
-(0, 'comprador'),
-(3, 'super-administrador');
 
 -- --------------------------------------------------------
 
@@ -55,17 +46,6 @@ CREATE TABLE `produtos` (
   `imagem` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Despejando dados para a tabela `produtos`
---
-
-INSERT INTO `produtos` (`id_produtos`, `valor`, `nome`, `descricao`, `imagem`) VALUES
-(1, 2, 'ola mundo!', 'ola', '1721253642697-Captura de tela 2024-05-26 170132.png'),
-(3, 5, 'biscoito', 'doce', '1721338571100-Captura de tela 2024-02-26 122047.png'),
-(4, 5.25, 'rapadura', 'é doce e dura', '1721338589971-Captura de tela 2024-02-04 135951.png'),
-(6, 5, 'teste', 'testudo', '1721423401592-Captura de tela 2024-02-01 183447.png'),
-(7, 5, 'pikachu', 'testudo', '1718897337160-pikachu.png');
-
 -- --------------------------------------------------------
 
 --
@@ -79,17 +59,6 @@ CREATE TABLE `usuarios` (
   `nome` varchar(45) DEFAULT NULL,
   `categoria` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuarios`, `email`, `senha`, `nome`, `categoria`) VALUES
-(1, 'andre@hotmail.com', '0000', 'andre', 1),
-(2, 'teste@hotmail.com', '0000', 'test', 0),
-(3, 'y', 'z', 'x', 0),
-(4, 'felipe@hotmail.com', '1111', 'felipe', 0),
-(5, 'superandre@hotmail.com', '0000', 'superandre', 3);
 
 -- --------------------------------------------------------
 
@@ -106,21 +75,6 @@ CREATE TABLE `vendas` (
   `id_produtos` int(11) NOT NULL,
   `estado` varchar(45) DEFAULT 'nao confirmado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Despejando dados para a tabela `vendas`
---
-
-INSERT INTO `vendas` (`id_vendas`, `quantidade`, `valor_total`, `valor_unitario`, `id_usuarios`, `id_produtos`, `estado`) VALUES
-(4, 2, 10.5, 5.25, 2, 4, 'confirmado'),
-(8, 13, 13, 1, 2, 1, 'confirmado'),
-(10, 2, 2, 1, 2, 1, 'nao confirmado'),
-(11, 3, 24, 8, 2, 3, 'nao confirmado'),
-(12, 3, 3, 1, 2, 1, 'nao confirmado'),
-(13, 4, 20, 5, 2, 7, 'nao confirmado'),
-(14, 8, 40, 5, 2, 7, 'nao confirmado'),
-(15, 4, 16.24, 4.06, 2, 6, 'nao confirmado'),
-(16, 4, 4, 1, 2, 1, 'nao confirmado');
 
 --
 -- Índices para tabelas despejadas
@@ -154,19 +108,19 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id_produtos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_produtos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id_vendas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_vendas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas

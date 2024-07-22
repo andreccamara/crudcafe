@@ -1,4 +1,6 @@
-// public/js/theme-toggle.js
+
+// temas dark e ligth :
+
 document.addEventListener('DOMContentLoaded', function () {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
@@ -22,8 +24,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// sanduwish da navbar
 function toggleMenu() {
     const navbarLinks = document.querySelector('.navbar-links');
     navbarLinks.classList.toggle('show');
 }
 
+// confirmação de ação:
+function confirmAction(url, action) {
+    let message = '';
+    if (action === 'excluir') {
+        message = 'Você tem certeza que deseja excluir?';
+    } else if (action === 'confirmar') {
+        message = 'Você tem certeza que deseja confirmar?';
+    } else {
+        window.location.href = url;
+        return;
+    }
+    // confirm() é nativo do js e faz aparecer uma mensagem e dois botões(ok/cancelar) para o usuario retornar true ou false
+    if (confirm(message)) {
+        window.location.href = url;
+    }
+}

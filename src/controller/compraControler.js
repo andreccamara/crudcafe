@@ -9,7 +9,7 @@ module.exports = {
         try {
             const venda = await compras.paginaComprar(id_produto);
             req.session.valor=venda.valor
-            res.render('formComprar', { venda })
+            res.render('compras/formComprar', { venda })
         } catch (error) {
             console.error('Erro:', error);
             let erro = 'Erro';
@@ -30,7 +30,7 @@ module.exports = {
         console.log(id_usuario)
         const lista_de_compras = await compras.buscarCompras(id_usuario)
         const nome = req.session.nome
-        res.render('compras', { lista_de_compras, nome })
+        res.render('compras/compras', { lista_de_compras, nome })
     },
     //confirmar a compra
     confirmarCompra: async (req, res) => {
@@ -46,14 +46,12 @@ module.exports = {
             const resultados = await compras.conferir(id_venda);
             const conferir = resultados[0];
             
-            if (conferir.estado === 'confirmado') {
-            //     let message = 'Compras confirmadas não podem ser editadas. Para mais informações, fale com um atendente.';
-            //    Envie um alerta para o cliente
-            //    alert(message)
+            if (conferir.estado != 'nao confirmado' && req.session.categoria == 0) {
+                confirm('compras confirmadas nao podem ser editadas')
                 return res.redirect("/compras/listar")
             } else {
                 const compra = await compras.editar(id_venda);
-                res.render('formCompraEditar', { compra });
+                res.render('compras/formCompraEditar', { compra });
             }
         } catch (error) {
             console.error('Erro ao editar compra:', error);
@@ -75,7 +73,9 @@ module.exports = {
         let id_venda = req.params.id_venda;
         try {
             const resultados = await compras.conferir(id_venda); const conferir = resultados[0];
-            if (conferir.estado == 'confirmado') { return res.redirect("/compras/listar"); } else {
+            if (conferir.estado != 'nao confirmado') {
+                // usuario comprador nao pode deletar
+                return res.redirect("/compras/listar"); } else {
                 // Deletar o produto e obter o nome da imagem
                 await compras.delete(id_venda);
                 return res.redirect("/compras/listar");

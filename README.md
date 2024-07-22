@@ -1,6 +1,7 @@
 # cafeteria crud
  CRUD em node
-pacotes do node que precisam ser instalados:
+clone o repositorio,
+instale os seguintes pacotes do node:
 express 
 express-session 
 ejs
@@ -9,7 +10,6 @@ multer
 
 a depender de versão será necessário o body-parser
 
-alem disso é necessário um servidor mysql com as tabelas de cafeteria.
-copie e cole o codigo de codigo.sql para criar o banco de dados.
+conecte com um servidor mysql e nele execute o script do arquivo cafeteriaSQL(copie e cole o codigo de codigo.sql para criar o banco de dados).
 
-O projeto possui funcionalidades para administrar um cardápio de uma cafeteria, bem como compras dos produtos 
+O projeto é um sistema de vendas de produtos

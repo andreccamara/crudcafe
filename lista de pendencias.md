@@ -2,11 +2,12 @@
 **backend:**
 1 - ~~criar o 'cadastrar usuario'~~
 2 - ~~criar uma categoria de usuario: super-administrador~~
-    2.2 - criar um cadastrar administrador (para super-administrador)
-3 - criar um retirar administrador (para superadministrador)
-4 - alterar senha
+    ~~2.2 - criar 'um cadastrar administrador' (para super-administrador)~~
+~~3 - criar um retirar administrador (para superadministrador)~~
+4 - criar listar todas as compras
 5 - criar uma exibição de mensagem ao usuario que tenta editar compra confirmada
 6 - criar editar e excluir compra confirmada (administrador)
+    -adicionar data da compra
 7 - criar um visualizar todas as compras (administrador)
 8 - modificar o banco de dados para incluir email
 9 - criar o esqueci a senha 

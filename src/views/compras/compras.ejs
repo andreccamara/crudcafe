@@ -27,16 +27,16 @@
         </div>
     </nav>
 
-
-    <table class="table container">
+    <table class="table-container">
         <caption>COMPRAS:</caption>
 
         <tr>
-            <th>nome do produto</th>
+            
+            <th>produto</th>
             <th>imagem</th>
-            <th>quantidade</th>
+            <th class="quantidade">quantidade</th>
             <th>Valor total</th>
-            <th>estado do pedido</th>
+            <th>estado</th>
             <th>ação</th>
         </tr>
         <% lista_de_compras.forEach(item=> { %>
@@ -57,45 +57,29 @@
                     <%= item.quantidade %>
                 </td>
                 <td>
-                    <%= item.valor_total %>
+                    R$:<%= item.valor_total %>
                 </td>
-                <td class="estado_da_compra">
+                <td class='estado-<%= item.estado %>'>
                     <%= item.estado %>
                 </td>
-                <td>
-                    <% if (item.estado !== "confirmado") { %>
+                <td >
+                    <div id="acao-venda" style="display: flex; justify-content: center;">
+                    <% if (item.estado === "nao confirmado") { %>
                         <button
                             onclick="confirmAction('/compra/confirmar/<%= item.id_vendas %>', 'confirmar')">confirmar</button>
-                        <button
-                            onclick="confirmAction('/compra/editar/<%= item.id_vendas %>', 'editar')">editar</button>
+                        <button onclick="confirmAction('/compra/editar/<%= item.id_vendas %>', 'editar')">editar</button>
                         <button
                             onclick="confirmAction('/compra/deletar/<%= item.id_vendas %>', 'excluir')">excluir</button>
                             <% } else { %>
-                                <button onclick="viewAction('/compra/ver/<%= item.id_vendas %>')">ver</button>
+                                <p class="estado-<%= item.estado %>" > <%= item.estado %> </p>
+                                <button onclick="viewAction('/compra/ver/<%= item.id_vendas %>')">ver pedido</button>
                             <% } %>
-
+                        </div>
                 </td>
             </tr>
             <% }) %>
     </table>
 
-    <script>
-        function confirmAction(url, action) {
-            let message = '';
-            if (action === 'excluir') {
-                message = 'Você tem certeza que deseja excluir?';
-            } else if (action === 'confirmar') {
-                message = 'Você tem certeza que deseja confirmar?';
-            } else {
-                window.location.href = url;
-                return;
-            }
-
-            if (confirm(message)) {
-                window.location.href = url;
-            }
-        }
-    </script>
 
 </body>
 <script src="/script/script.js"></script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+    <!-- <p>Seja bem-vindo(a), <%= nome %>!</p> -->
+
+    <nav class="navbar">
+        <!-- Botão Hambúrguer -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main">Produtos</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+        </div>
+    </nav>
+
+    <table class="table-container">
+        <caption>COMPRAS:</caption>
+
+        <tr>
+            <th>Nome</th>
+            <th>Produto</th>
+            <th>Imagem</th>
+            <th class="quantidade">Quantidade</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Ação</th>
+        </tr>
+        <% lista_de_compras.forEach(item => { %>
+            <tr>
+                <td><%= item.nome %></td>
+                <td><%= item.nome_produto %></td>
+                <!-- Imagem -->
+                <td>
+                    <% if (item.imagem) { %>
+                        <img src="/uploads/<%= item.imagem %>" class="produto-imagem" alt="produto">
+                    <% } else { %>
+                        <span>Sem imagem</span>
+                    <% } %>
+                </td>
+                <td><%= item.quantidade %></td>
+                <td>R$:<%= item.valor_total %></td>
+                
+                <td class='estado-<%= item.estado %>'>
+                    <%= item.estado %>
+                </td>
+                <td>
+                    <div id="acao-venda">
+                        <button onclick="confirmAction('/compra/estado/form/<%= item.id_vendas %>', 'editar')">editar</button>
+                        <button onclick="confirmAction('/compra/deletar/<%= item.id_vendas %>', 'excluir')">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+</body>
+<script src="/script/script.js"></script>
+
+</html>

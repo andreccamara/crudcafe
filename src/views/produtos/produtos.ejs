@@ -36,7 +36,7 @@
 
 
     <!-- tabela -->
-    <table class="table container">
+    <table class="table-container">
         <caption>PRODUTOS:</caption>
 
         <tr>
@@ -59,7 +59,7 @@
                     <%= item.descricao %>
                 </td>
                 <td>
-                    <%= item.valor %>
+                    R$: <%= item.valor.toFixed(2) %>
                 </td>
                 <td>
                     <% if (item.imagem) { %>

@@ -39,6 +39,20 @@ module.exports = {
                 resolve(results);
             });
         });
+    },  
+
+    buscarTodasAsCompras: () => {
+        return new Promise((resolve, reject) => {
+            conexao.query('SELECT u.nome, vendas_produtos.* FROM (SELECT p.nome as nome_produto, p.imagem, v.quantidade, v.valor_total, v.estado, v.id_usuarios, v.id_vendas FROM vendas v  JOIN produtos p ON v.id_produtos = p.id_produtos) AS vendas_produtos JOIN usuarios u ON u.id_usuarios = vendas_produtos.id_usuarios;', (error, results) => {
+                if (error) {
+                    console.log(erro)
+                    reject(new Error('Something went wrong'));
+                    return;
+                }
+                console.log("Sucesso ao listar compras!!");
+                resolve(results);
+            });
+        });
     },
 
     confirmarCompra: (id_compra) => {
@@ -71,6 +85,20 @@ module.exports = {
                 });
         });
     },
+
+
+    formEstadoDaCompra: (id) => {
+        return new Promise((resolve, reject) => {
+                 conexao.query('SELECT u.nome, vendas_produtos.* FROM (SELECT p.nome as nome_produto, p.imagem, v.quantidade, v.valor_total, v.estado, v.id_usuarios, v.id_vendas FROM vendas v  JOIN produtos p ON v.id_produtos = p.id_produtos) AS vendas_produtos JOIN usuarios u ON u.id_usuarios = vendas_produtos.id_usuarios where id_vendas = ?;',
+                [id],
+                (error, results) => {
+                    if (error) { reject(error); return; }
+                    resolve(results[0])
+                });
+        });
+    },
+
+
     alterar: (id, quantidade) => {
         return new Promise((resolve, reject) => {
             let qnt = Number(quantidade)
@@ -83,7 +111,21 @@ module.exports = {
                     resolve(results)
                 });
         });
+    }, 
+
+    alterarEstado: (id, estado) => {
+        return new Promise((resolve, reject) => {
+            conexao.query('UPDATE vendas SET estado = ? WHERE id_vendas = ?',
+                [estado, id],
+                (error, results) => {
+                    if (error) { reject(error); return; }
+                    console.log("Sucesso ao editar!!")
+                    resolve(results)
+                });
+        });
     },
+
+
 
     conferir: (id) => {
         return new Promise((resolve, reject) => {
@@ -96,6 +138,9 @@ module.exports = {
                 });
         });
     },
+
+
+
     delete: (id) => {
         return new Promise((resolve, reject) => {
 

@@ -6,8 +6,9 @@ const homeController = require('../controller/homeControler');
 const loginController = require('../controller/loginControler');
 const produtoController = require('../controller/produtoControler');
 const compraController = require('../controller/compraControler');
+const admController = require('../controller/admControler');
 // middlewares
-const { isAuthenticated, isAdmin } = require('../middlewares/authMiddleware');
+const { isAuthenticated, isAdmin, isControler } = require('../middlewares/authMiddleware');
 
 // Rotas
 
@@ -40,6 +41,9 @@ router.get('/main2', loginController.main2);
 router.get('/compras/listar', isAuthenticated, compraController.comprasListar);
 
 // Rotas protegidas por autenticação e autorização de administrador
+
+
+
 // Rota de produto
 router.get('/produto/form', isAuthenticated, isAdmin, produtoController.form);
 router.post('/produto/createProduto', isAuthenticated, isAdmin, produtoController.createProduto);
@@ -56,5 +60,17 @@ router.get('/compra/editar/:id_venda', isAuthenticated, compraController.editarC
 router.post('/compra/alterar/:id_venda', isAuthenticated, compraController.alterarCompra);
 router.get('/compra/deletar/:id_venda', isAuthenticated, compraController.deletarCompra);
 // router.get('/compra/confirmada/deletar/:id_venda', isAuthenticated, compraController.deletarCompraconfirmada);
+
+// Rotas protegidas por autenticação e autorização de controlador
+// Rota de crud de funcionarios
+router.get('/formCadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.formCadastrarAdministrador);
+router.post('/CadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.cadastrarAdmin);
+router.get('/VerAdmin', isAuthenticated, isAdmin, isControler, admController.funcionarios);
+router.get('/funcionario/deletar/:id_funcionario', isAuthenticated, isAdmin, isControler, admController.deletarFuncionario);
+
+// Rotas de crud de pedidos/compras
+router.get('/compras/listar/todas', isAuthenticated, isAdmin, admController.listarTodasAsCompras);
+router.post('/compra/alterarestado/:id_venda', isAuthenticated, isAdmin, admController.alterarEstadoCompra);
+router.get('/compra/estado/form/:id_venda', isAuthenticated, isAdmin, admController.formEstadoCompra);
 
 module.exports = router;

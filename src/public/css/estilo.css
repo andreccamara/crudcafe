@@ -18,7 +18,7 @@ body.dark-theme {
 }
 
 body.dark-theme th,
-body.dark-theme tr:nth-child(even),
+body.dark-theme .table-container tr:nth-child(even),
 body.dark-theme h1,
 body.dark-theme caption
 {
@@ -34,7 +34,7 @@ body.dark-theme label
 }
 
 
-body.dark-theme tr:nth-child(odd) {
+body.dark-theme .table-container tr:nth-child(odd) {
     background-color: #3d3d3d;
     color: white;
 }
@@ -49,40 +49,41 @@ caption {
     
     color: #333;
 }
-
-table {
+.table-container{
     width: 90%;
     margin: 0 auto;
     border-collapse: collapse;
     margin-bottom: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
 
     display: table; /* Define o display da tabela como table para comportar corretamente o caption */
 }
 
-caption {
+.table-container caption {
     caption-side: top; /* Certifica-se de que o caption está no topo da tabela */
     text-align: left;  /* Alinha o texto do caption à esquerda */
     font-weight: bold; /* (Opcional) Torna o texto em negrito para melhor visibilidade */
     margin-bottom: 10px; /* (Opcional) Adiciona espaço abaixo do caption para separá-lo da tabela */
+    color: black;
 }
 
 
-th, td {
+.table-container th, td {
     border: 1px solid #999999;
     padding: 8px;
 }
 
-th {
+.table-container th {
     background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
+
+.table-container tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-tr:nth-child(odd) {
+.table-container tr:nth-child(odd) {
     background-color: #fff;
 }
 
@@ -90,10 +91,53 @@ tr:nth-child(odd) {
     max-width: 100px;
     height: auto;
 }
+table .quantidade,.numero, .valor {
+    font-size: smaller;
+}
+
+#formtable tr,td{
+    border: none;
+
+}
+#acao-venda{
+    display: flex; justify-content: center;
+}
+
+.estado-nao-confirmado{
+}
+.estado-confirmado{
+    background-color: green;
+    color: black;
+    margin: 5px;
+    padding: 10px 20px; 
+    border-radius: 5px;
+}
+
+
+.estado-encaminhado{
+    background-color:yellow;
+    color: black;
+    margin: 5px;
+    padding: 10px 20px; 
+    border-radius: 5px;
+}
+.estado-entregue{
+    background-color: blue;
+    color: black;
+    margin: 5px;
+    padding: 10px 20px; 
+    border-radius: 5px;
+}
+
+.estado-cancelado{
+    color: black;
+    background-color: red;
+}
 
 @media (max-width: 600px) {
     .table {
-        font-size: 14px; /* Reduz o tamanho da fonte */
+        font-size: 12px; /* Reduz o tamanho da fonte */
+        margin: 10px;
     }
 
     .table th, .table td {
@@ -102,6 +146,12 @@ tr:nth-child(odd) {
 
     .table img.produto-imagem {
         max-width: 50px; /* Reduz o tamanho das imagens */
+    }
+   
+    table button{
+        font-size: smaller;
+        padding: 5px;
+        margin: 3px;
     }
 }
 
@@ -155,6 +205,12 @@ body.light-theme .navbar {
     left: 0;
     padding: 10px 0; /* Padding para telas grandes */
 }
+#administracao button{
+margin: 0%;
+}
+#administracao .navbar-links{ 
+    gap: 5px; /* Espaço entre os botões */
+}
 
 /* Contêiner da navbar */
 .navbar-container {
@@ -196,12 +252,22 @@ body.light-theme .navbar {
 
 /* Estilos da imagem */
 .logo-imagem {
-    max-width: 50px; /* Tamanho máximo da imagem */
+    max-width: 40px; /* Tamanho máximo da imagem */
     height: auto;
     position: absolute;
-    right: 20px; /* Espaço à direita da imagem */
+    left: 5px; /* Espaço à direita da imagem */
+    top: 5px
 }
-
+@media (max-width: 800px) {
+    #logo-adm {
+    display: none;
+    }
+}
+@media (max-width: 700px) {
+    #logo-imagem {
+    display: none;
+    }
+}
 /* Estilos para dispositivos móveis */
 @media (max-width: 600px) {
     .navbar-links {
@@ -209,7 +275,9 @@ body.light-theme .navbar {
         flex-direction: column; /* Alinha os botões verticalmente */
         gap: 10px; /* Reduz o espaço entre os botões */
     }
-
+    .navbar {
+        position: absolute;
+    }
     .navbar-links.show {
         display: flex; /* Mostra os links quando a classe 'show' estiver presente */
     }
@@ -262,7 +330,7 @@ form {
     min-width: 300px;
 }
 
-body.dark-theme form{
+.body.dark-theme form{
     background-color: rgb(87, 107, 102);
 }
 

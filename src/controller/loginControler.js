@@ -5,12 +5,14 @@ const session = require('express-session');
 
 // exportando
 module.exports = {
+    // essa função vai pesquisar no BD para ver se as informações encontram correspondencia
     autenticacao: async (req, res) => {
         const email = req.body.email;
         const senha = req.body.senha;
         try {
+            // login.verificacao(email, senha) procura no BD se há dados com as informações do email e da senha fornecidos
             const usuario = await login.verificacao(email, senha);
-
+// aqui, se der certo encontrar um usuario com as informações fornecidas, redireciona-se para a pagina correspondente a sua categoria
             if (usuario) {
                 req.session.id_usuario = usuario.id_usuarios; // Armazene na sessão
                 req.session.nome = usuario.nome; // Armazene na sessão
@@ -20,6 +22,8 @@ module.exports = {
                     res.redirect('/main');
                 } else if (usuario.categoria == 0) {
                     res.redirect('/main2');
+                } else if (usuario.categoria == 3) {
+                    res.redirect('main')
                 } else {
                     let erro = 'Usuário errado';
                     res.render('home2', { erro: erro });
@@ -36,7 +40,8 @@ module.exports = {
     },
 
     logout: (req, res) => {
-        console.log('Sessão antes de destruir:', req.session); // Log correto
+        // aqui é o logout para sair da sessao
+        // console.log('Sessão antes de destruir:', req.session);
         req.session.destroy((err) => {
             if (err) {
                 console.error('Erro ao destruir a sessão:', err);
@@ -51,26 +56,55 @@ module.exports = {
 
     main: async (req, res) => {
         try {
+            // aqui se faz uma pesquisa sql para pegar informações de todos os produtos
             const produtos = await produto.buscarProdutos();
+            // aqui devolve-se as informações para o frontend que as renderizará
             res.render('administracao', { nome: req.session.nome, produtos, categoria: req.session.categoria });
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
             res.status(500).send('Erro ao carregar a página principal.');
         }
     },
+    
+    funcionarios: async (req, res) => {
+        try {
 
+            const funcionarios = await login.buscarFuncionarios();
+            res.render('funcionarios', { nome: req.session.nome, funcionarios, categoria: req.session.categoria });
+        } catch (error) {
+            console.error('Erro ao buscar produtos:', error);
+            res.status(500).send('Erro ao carregar a página principal.');
+        }
+    },
+
+    deletarFuncionario: async (req, res) => {
+        let id_funcionario = req.params.id_funcionario;
+
+        try {
+            // o model vai Deletar o cadastro do funcionario selecionado
+            const funcionario = await login.deletarFuncionario(id_funcionario);
+            return res.redirect('/main');
+        } catch (error) {
+            console.error('Erro ao deletar o funcionario:', error);
+            return res.status(500).send('Erro ao deletar o funcionario');
+        }
+    },
+// entrando no form de cadastro:
     formCadastrarUsuario: (req, res) => {
         res.render('formCadastrarUsuario', { mensagem: null});
     },
-
+    formCadastrarAdministrador: (_, res) => {
+        res.render('formCadastrarAdministrador', { mensagem: null});
+    },
 
     cadastrarusuario: async (req, res) => {
         const { nome, email, senha } = req.body;
         try {
-            const resultado = await login.verificarEmailEInserir(nome, email, senha);
-            // console.log('cadastrar usuario controler')
+            // antes de cadastrar o model vai verificar se o email já não está cadastrado
+            const resultado = await login.verificarCadastrarUsuario(nome, email, senha);
             if (resultado.sucesso) {
-                res.redirect('/'); // Redireciona para a página de login após o registro bem-sucedido
+                // Redireciona para a página de login após o registro bem-sucedido
+                res.redirect('/'); 
             } else {
                 res.render('formCadastrarUsuario', { mensagem: resultado.mensagem }); // Renderiza a página de registro com a mensagem de erro
             }
@@ -79,11 +113,28 @@ module.exports = {
             res.render('formCadastrarUsuario', { mensagem: 'Erro ao registrar usuário.' });
         }
     },
-
+    cadastrarAdmin: async (req, res) => {
+        const { nome, email, senha } = req.body;
+        try {
+            const resultado = await login.verificarCadastrarAdministrador(nome, email, senha);
+            // console.log('cadastrar usuario controler')
+            if (resultado.sucesso) {
+                res.redirect('/main'); // Redireciona para a página de login após o registro bem-sucedido
+            } else {
+                res.render('formCadastrarAdministrador', { mensagem: resultado.mensagem }); // Renderiza a página de registro com a mensagem de erro
+            }
+        } catch (error) {
+            console.error('Erro ao registrar administrador:', error);
+            res.render('formCadastrarAdministrador', { mensagem: 'Erro ao registrar administrador.' });
+        }
+    },
+//renderizar a pagina de catalogo de produtos para os compradores 
     main2: async (req, res) => {
         try {
+            // pesquisa no model todos os produtos e retorna o resultado
             const produtos = await produto.buscarProdutos()
-            res.render('produtos', { nome: req.session.nome, produtos });
+            // entrega as informações para o frontend ejs
+            res.render('produtos/produtos', { nome: req.session.nome, produtos });
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
             res.status(500).send('Erro ao carregar a página principal.');

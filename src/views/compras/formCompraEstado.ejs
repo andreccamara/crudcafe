@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form produto</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+
+    <!-- navbar -->
+    <nav class="navbar">
+        <!-- Botão Hambúrguer -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main">Produtos</a></button>
+            <button><a href="/compras/listar/todas">Compras</a></button>
+
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+        </div>
+    </nav>
+
+
+    <div class="form-container">
+        <form action="/compra/alterarestado/<%= compra.id_vendas%>" method="post">
+
+            <table id="formtable">
+                <th>pedido <%= compra.id_vendas%>
+                </th>
+
+                <tr>
+                    <td>
+                        comprador: <br>
+                        <%= compra.nome %>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <%= compra.quantidade %>
+                            <%= compra.nome_produto %>s
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Total: R$ <%= compra.valor_total %>
+                    </td>
+                </tr>
+
+                <div class="form-container">
+
+                    <tr>
+                        <td>
+                            <%= compra.estado %>
+
+                    </tr>
+                    </td>
+
+                    <tr>
+                        <td>
+                            <select name="estado" id="select-<%= compra.id_vendas %>">
+                                <option value="nao confirmado" <%=compra.estado==='nao confirmado' ? 'selected' : '' %>
+                                    >Não
+                                    Confirmado</option>
+                                <option value="confirmado" <%=compra.estado==='confirmado' ? 'selected' : '' %>
+                                    >Confirmado
+                                </option>
+                                <option value="encaminhado" <%=compra.estado==='encaminhado' ? 'selected' : '' %>>Em
+                                    Trânsito</option>
+                                <option value="entregue" <%=compra.estado==='entregue' ? 'selected' : '' %>>Entregue
+                                </option>
+                                <!-- <option value="finalizado" <%=compra.estado==='finalizado' ? 'selected' : '' %>
+                                    >Finalizado
+                                </option> -->
+                                <option value="cancelado" <%=compra.estado==='cancelado' ? 'selected' : '' %>>Cancelado
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Alterar">
+                        </td>
+                    </tr>
+                </div>
+                </td>
+                </tr>
+    </div>
+    </form>
+
+    </table>
+</body>
+
+<script src="/script/script.js"></script>
+
+</html>

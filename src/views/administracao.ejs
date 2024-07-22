@@ -15,35 +15,41 @@
     <h1>CAFETERIA DO DEDE</h1>
     <p>Seja bem-vindo(a), admin <%= nome %>!</p>
 
+
     <!-- NAVBAR -->
-    <nav class="navbar">
+    <nav  id='administracao' class="navbar">
         <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
-    
+
         <!-- Links da Navbar -->
         <div class="navbar-links">
             <button class="logout"><a href="/logout">Sair</a></button>
             <button id="theme-toggle">Dark Mode</button>
-            <button><a href="/main">Produtos</a></button>
             <button><a href="/produto/form">Cadastrar produto</a></button>
+            <button><a href="/compras/listar/todas">Compras</a></button>
+
+            <% if (categoria==3) { %>
+                <button class="cadastrarUsuario"><a href="/VerAdmin"> Ver Administradores</a></button>
+                <% } %>
+
             <!-- Imagem do logo -->
-            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+            <img id='logo-adm'class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
         </div>
     </nav>
-    
 
-    <table class="table container">
+
+    <table class="table-container">
         <caption>PRODUTOS:</caption>
 
         <tr>
-            <th>Número</th>
+            <th class="numero">Número</th>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Valor</th>
+            <th class="valor">Valor</th>
             <th>Imagem</th>
             <th>Ações</th>
         </tr>
- 
+
         <% produtos.forEach(item=> { %>
             <tr>
                 <td>
@@ -66,8 +72,11 @@
                             <% } %>
                 </td>
                 <td>
-                    <a href='/produto/editar/<%= item.id_produtos %>'><button>Editar</button></a>
-                    <a href="/produto/deletar/<%= item.id_produtos %>"><button>Excluir</button></a>
+                    <button onclick="confirmAction('/produto/editar/<%= item.id_produtos %>', 'editar')">
+                        Editar</button>
+                    <button
+                        onclick="confirmAction('/produto/deletar/<%= item.id_produtos %>', 'excluir')">Excluir</button>
+
                 </td>
             </tr>
             <% }) %>
