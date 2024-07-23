@@ -11,12 +11,12 @@
 
 <body class="light-theme">
     <h1>CAFETERIA DO DEDE</h1>
-    
+
     <!-- navbar -->
     <nav class="navbar">
         <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
-    
+
         <!-- Links da Navbar -->
         <div class="navbar-links">
             <button class="logout"><a href="/logout">Sair</a></button>
@@ -29,28 +29,35 @@
     </nav>
 
 
-    <div class="form-container">
-
-        <form action="/compra/alterar/<%= compra.id_vendas%>" method="post">
+    <div class="ver-pedido">
+        <form>
+            <p><strong>
+                <%= compra.nome %>
+            </strong></p>
             <% if (compra.imagem) { %>
                 <img src="/uploads/<%= compra.imagem %>" class="produto-imagem" alt="produto">
                 <% } else { %>
                     <span>Sem imagem</span>
-                    <% } %>
-                        <p><strong>nome: 
-                                <%= compra.nome %>
-                            </strong></p>
-                        <p><strong>Descrição:</strong>
+                    <% } %>              
+                    <p>valor: <br> <%= compra.valor_unitario %> reais por unidade </p>
+                        <p> <%= compra.quantidade %> unidades </p>
+                            <p>total: R$: <%= compra.valor_total %></p>
+                        </span></p>
+                        <div style="display: flex; justify-content: start;"><p >Descrição: Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, quidem tempora! Nisi tempora perspiciatis, sunt minus pariatur, facere facilis debitis placeat laboriosam quaerat ratione provident temporibus ducimus ut minima itaque.
                             <%= compra.descricao %>
-                        </p>
-                        <p><strong>Valor:</strong> R$ <span id="valor">
-                                <%= compra.valor %>
-                            </span></p>
-                        <label for="quantidade"> <strong>Quantidade:</strong></label>
-                        <input type="number" name="quantidade" value="<%= compra.quantidade %>" required>
-                        <input type="submit" value="editar compras">
-
+                        </p></div>
+                        <div>
+        <button onclick="confirmAction('/compra/confirmar/<%= compra.id_vendas %>', 'confirmar')">confirmar</button>
+        <button onclick="confirmAction('/compra/editar/<%= compra.id_vendas %>', 'editar')">editar</button>
+        <button onclick="confirmAction('/compra/deletar/<%= compra.id_vendas %>', 'excluir')">cancelar</button></div>
         </form>
+
+
+    </div>
+    </table>
+
+
+
 
 </body>
 

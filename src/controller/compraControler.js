@@ -59,6 +59,18 @@ module.exports = {
             res.render('home2', { erro: erro });
         }
     },
+    vercompra: async (req, res) => {
+        let id_venda = req.params.id_venda;
+        console.log(id_venda);
+        try {
+                const compra = await compras.editar(id_venda);
+                res.render('compras/verPedido', { compra });
+            } catch (error) {
+            console.error('Erro ao localizar compra:', error);
+            let erro = 'Erro ao localizar compra';
+            res.render('home2', { erro: erro });
+        }
+    },
     
     //alterar a compra
     alterarCompra: async (req, res) => {

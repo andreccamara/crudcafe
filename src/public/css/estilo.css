@@ -361,3 +361,18 @@ input[type="submit"]:hover {
 }
 
 
+.ver-pedido{
+    display: flex;
+    justify-content: center;
+}
+.ver-pedido p {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.ver-pedido form{
+    background-color: aquamarine;
+}
+body.dark-theme .ver-pedido form{
+    background-color:rgb(0, 0, 66);
+
+}

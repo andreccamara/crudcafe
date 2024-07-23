@@ -64,16 +64,9 @@
                 </td>
                 <td >
                     <div id="acao-venda" style="display: flex; justify-content: center;">
-                    <% if (item.estado === "nao confirmado") { %>
-                        <button
-                            onclick="confirmAction('/compra/confirmar/<%= item.id_vendas %>', 'confirmar')">confirmar</button>
-                        <button onclick="confirmAction('/compra/editar/<%= item.id_vendas %>', 'editar')">editar</button>
-                        <button
-                            onclick="confirmAction('/compra/deletar/<%= item.id_vendas %>', 'excluir')">excluir</button>
-                            <% } else { %>
-                                <p class="estado-<%= item.estado %>" > <%= item.estado %> </p>
-                                <button onclick="viewAction('/compra/ver/<%= item.id_vendas %>')">ver pedido</button>
-                            <% } %>
+
+                                <button><a href="/compra/ver/<%= item.id_vendas %>">ver pedido</a></button>  
+
                         </div>
                 </td>
             </tr>

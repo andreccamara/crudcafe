@@ -59,13 +59,14 @@ router.get('/compra/confirmar/:id', isAuthenticated, compraController.confirmarC
 router.get('/compra/editar/:id_venda', isAuthenticated, compraController.editarCompra);
 router.post('/compra/alterar/:id_venda', isAuthenticated, compraController.alterarCompra);
 router.get('/compra/deletar/:id_venda', isAuthenticated, compraController.deletarCompra);
+router.get('/compra/ver/:id_venda', isAuthenticated, compraController.vercompra);
 // router.get('/compra/confirmada/deletar/:id_venda', isAuthenticated, compraController.deletarCompraconfirmada);
 
 // Rotas protegidas por autenticação e autorização de controlador
 // Rota de crud de funcionarios
-router.get('/formCadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.formCadastrarAdministrador);
-router.post('/CadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.cadastrarAdmin);
-router.get('/VerAdmin', isAuthenticated, isAdmin, isControler, admController.funcionarios);
+router.get('/funcionario/formCadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.formCadastrarAdministrador);
+router.post('/funcionario/CadastrarNovoAdmin', isAuthenticated, isAdmin, isControler, admController.cadastrarAdmin);
+router.get('/funcionario/VerAdmin', isAuthenticated, isAdmin, isControler, admController.funcionarios);
 router.get('/funcionario/deletar/:id_funcionario', isAuthenticated, isAdmin, isControler, admController.deletarFuncionario);
 
 // Rotas de crud de pedidos/compras
