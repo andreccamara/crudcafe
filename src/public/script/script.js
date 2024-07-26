@@ -25,8 +25,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // sanduwish da navbar
+// Função para alternar a exibição do menu da navbar
 function toggleMenu() {
+    // Seleciona o elemento da navbar com a classe 'navbar-links'
     const navbarLinks = document.querySelector('.navbar-links');
+
+    // Alterna a classe 'show' no elemento selecionado
+    // Se a classe 'show' estiver presente, ela será removida
+    // Se a classe 'show' não estiver presente, ela será adicionada
     navbarLinks.classList.toggle('show');
 }
 
@@ -37,12 +43,20 @@ function confirmAction(url, action) {
         message = 'Você tem certeza que deseja excluir?';
     } else if (action === 'confirmar') {
         message = 'Você tem certeza que deseja confirmar?';
+    } else if (action === 'endereco') {
+        message = 'Você tem certeza que deseja trocar o endereço?';
     } else {
         window.location.href = url;
         return;
     }
-    // confirm() é nativo do js e faz aparecer uma mensagem e dois botões(ok/cancelar) para o usuario retornar true ou false
+
     if (confirm(message)) {
-        window.location.href = url;
+        // Cria um formulário dinâmico
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
+        document.body.appendChild(form);
+        form.submit();
     }
 }
+

@@ -26,18 +26,18 @@
             <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
         </div>
     </nav>
-
     <table class="table-container">
         <caption>COMPRAS:</caption>
 
         <tr>
-            
+
             <th>produto</th>
             <th>imagem</th>
             <th class="quantidade">quantidade</th>
-            <th>Valor total</th>
-            <th>estado</th>
-            <th>ação</th>
+            <th class="valor_total">Valor total</th>
+            <th class="estado">estado</th>
+            <th>açao</th>
+            <th>data</th>
         </tr>
         <% lista_de_compras.forEach(item=> { %>
             <tr>
@@ -53,21 +53,33 @@
                             <% } %>
                 </td>
 
-                <td>
+                <td class="quantidade">
                     <%= item.quantidade %>
                 </td>
-                <td>
+                <td class="valor_total">
                     R$:<%= item.valor_total %>
                 </td>
-                <td class='estado-<%= item.estado %>'>
-                    <%= item.estado %>
-                </td>
-                <td >
-                    <div id="acao-venda" style="display: flex; justify-content: center;">
-
-                                <button><a href="/compra/ver/<%= item.id_vendas %>">ver pedido</a></button>  
-
+                <div class="estado">
+                    <td class='estado estado-<%= item.estado %>'>
+                        <%= item.estado %>
+                    </td>
+                </div>
+               
+                <td>
+                    <div id="acao-venda" style="display:block; justify-content: center;">
+                        <div>
+                            <button><a style="color: black;" href="/compra/ver/<%= item.id_vendas %>">ver pedido</a></button>
                         </div>
+
+                        <div>
+                            <button><a style="color: black;" href="/compra/selecionarEndereco/<%= item.id_vendas %>"> selecionar
+                                    endereco</a></button>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <%= item.data_formatada %>
                 </td>
             </tr>
             <% }) %>

@@ -26,6 +26,10 @@ body.dark-theme caption
     color: white;
 }
 
+
+body.dark-theme form{
+border: 2px solid rgb(134, 130, 130);
+}
 body.dark-theme p,
 body.dark-theme label
 {
@@ -46,13 +50,14 @@ h1 {
 /* tabelas */
 
 caption {
-    
     color: #333;
 }
 .table-container{
     width: 90%;
     margin: 0 auto;
     border-collapse: collapse;
+    border: 1px solid #999999;
+    border-radius: 2px;
     margin-bottom: 100px;
     margin-left: 40px;
     margin-right: 40px;
@@ -63,13 +68,13 @@ caption {
 .table-container caption {
     caption-side: top; /* Certifica-se de que o caption está no topo da tabela */
     text-align: left;  /* Alinha o texto do caption à esquerda */
-    font-weight: bold; /* (Opcional) Torna o texto em negrito para melhor visibilidade */
-    margin-bottom: 10px; /* (Opcional) Adiciona espaço abaixo do caption para separá-lo da tabela */
+    font-weight: bold; 
+    margin-bottom: 20px; 
     color: black;
 }
 
 
-.table-container th, td {
+.table-container th, .table-container td {
     border: 1px solid #999999;
     padding: 8px;
 }
@@ -108,25 +113,15 @@ table .quantidade,.numero, .valor {
 .estado-confirmado{
     background-color: green;
     color: black;
-    margin: 5px;
-    padding: 10px 20px; 
-    border-radius: 5px;
 }
-
 
 .estado-encaminhado{
     background-color:yellow;
     color: black;
-    margin: 5px;
-    padding: 10px 20px; 
-    border-radius: 5px;
 }
 .estado-entregue{
     background-color: blue;
     color: black;
-    margin: 5px;
-    padding: 10px 20px; 
-    border-radius: 5px;
 }
 
 .estado-cancelado{
@@ -137,15 +132,37 @@ table .quantidade,.numero, .valor {
 @media (max-width: 600px) {
     .table {
         font-size: 12px; /* Reduz o tamanho da fonte */
-        margin: 10px;
     }
+    .table .quantidade{
+        display: none;
+        max-width: 15px;
+    }
+    .numero{
+        display: none;
+    }
+ 
 
     .table th, .table td {
-        padding: 5px; /* Reduz o padding das células */
+        font-size: smaller;
+        padding: 5px; 
+        max-width: 50px; 
+        word-wrap: break-word;
+        hyphens: auto;
     }
-
+    .table-container .estado, .table-container .estado td{
+    max-width: 70px;
+    word-wrap: break-word;
+    font-size: smaller;
+    margin: 0px;
+    }  
+    .table-container{
+        margin-left: 10px;
+    }
+    .valor_total{
+        display: none;
+    }
     .table img.produto-imagem {
-        max-width: 50px; /* Reduz o tamanho das imagens */
+        max-width: 40px; /* Reduz o tamanho das imagens */
     }
    
     table button{
@@ -189,13 +206,13 @@ button:hover {
 }
 
 body.light-theme .navbar {
-    background-color: #3d3a9a;
+    background-color: #001b6dc3;
 
 }
 /* Estilos gerais para a navbar */
 .navbar {
     width: 100%;
-    background-color: rgb(218, 218, 218);
+    background-color: rgba(0, 118, 228, 0.572);
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -266,6 +283,7 @@ margin: 0%;
 @media (max-width: 700px) {
     #logo-imagem {
     display: none;
+    
     }
 }
 /* Estilos para dispositivos móveis */
@@ -277,11 +295,23 @@ margin: 0%;
     }
     .navbar {
         position: absolute;
+        background-color: transparent;
+    }
+    body.light-theme .navbar{
+        position: absolute;
+        background-color: transparent;
     }
     .navbar-links.show {
         display: flex; /* Mostra os links quando a classe 'show' estiver presente */
     }
-
+    .quantidade{
+        display: none;
+    }
+    .estado{
+        max-width: 20px;
+        margin: 0%;
+        padding: 0%;
+    }
     .hamburger {
         display: flex; /* Exibe o botão hambúrguer */
         font-size: 24px;
@@ -312,7 +342,10 @@ margin: 0%;
     align-items: center;
     
 }
+.cadastro{
 
+    
+}
 form {
     margin-top: 20px;
     display: flex;
@@ -335,15 +368,17 @@ form {
 }
 
 label {
-    margin-top: 10px;
+    margin: 15px;
     color: black;
 }
 
 input {
     padding: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 50%;
 }
 
 input[type="submit"] {

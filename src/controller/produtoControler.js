@@ -29,7 +29,7 @@ module.exports = {
     editarProduto: async (req, res) => {
         let id_produto = req.params.id_produto
         // chama a função no model para capturar as informações do produto correspondente
-        const produtos = await produto.editar(id_produto)
+        const produtos = await produto.ver(id_produto)
         // pega as informações e entra na rota para o usuario preenchar o formulario e depois efetivamente dar updatetable
         res.render('produtos/formProdutoEditar', { produtos })
     },
@@ -43,9 +43,8 @@ module.exports = {
             let imagem = req.file ? req.file.filename : null            
             console.log("controle2");
             // chama a função no model para dar update table
-            await produto.alterar(id_produto, nome, descricao, valor, imagem)
+            await produto.alterarProdutoseVendasNaoConfirmadas(id_produto, nome, descricao, valor, imagem)
             console.log("Produto editado com sucesso");
-
             return res.redirect('/main');
         } catch (error) {
             console.error('Erro ao editar o produto:', error);

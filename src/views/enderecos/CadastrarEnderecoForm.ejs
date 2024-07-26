@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endereco</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Botão Hambúrguer -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+        </div>
+    </nav>
+
+
+    <div id="principal">
+        <h1>Cadastro de endereco</h1>
+        <div class='form-container '>
+            <form class="cadastro" action='/endereco/cadastrar' method="post">
+                <div>
+                    <label id="x" for=""> CEP: </label>
+                    <input name="cep" id='cep' type="text" placeholder="000.000.00">
+                </div>
+                <div>
+                    <label for=""> Complemento: </label>
+                    <input type="text" placeholder="" name="complemento" id="complemento">
+                </div>
+                <div>
+                    <label for=""> Rua: </label>
+                    <input type="text" name="rua" placeholder="" id="rua">
+                </div>
+                <div>
+                    <label for=""> Numero: </label>
+                    <input type="text" name="numero" placeholder="" id="numero">
+                </div>
+                <div>
+                    <label for=""> Bairro: </label>
+                    <input type="text" name="bairro" placeholder="" id="bairro">
+                </div>
+                <div>
+                    <label for=""> Cidade: </label>
+                    <input type="text" name="cidade" placeholder="" id="cidade">
+                </div>
+                <div>
+                    <label for=""> Estado: </label>
+                    <input type="text" name="estado" placeholder="" id="estado">
+                </div>
+                <input type="submit" value="cadastrar endereco">
+            </form>
+
+        </div>
+    </div>
+
+</body>
+<script src="/script/scriptEndereco.js"></script>
+<script src="/script/script.js"></script>
+
+</html>

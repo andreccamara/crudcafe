@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form produto</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+
+    <!-- navbar -->
+    <nav class="navbar">
+        <!-- Botão Hambúrguer -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+
+        
+        <!-- Links da Navbar -->
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/compras/listar">voltar</a></button>
+            <button><a href="/main2">Produtos</a></button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+        </div>
+    </nav>
+
+    <p>Meu Pedido:</p>
+
+    <div class="ver-pedido">
+
+        <form>
+            <table >
+                <tr> <th><h1> <%= compra.nome %></h1></th></tr>
+                <tr> <td>  <% if (compra.imagem) { %>
+                    <img src="/uploads/<%= compra.imagem %>" class="produto-imagem" alt="produto">
+                    <% } else { %>
+                        <span>Sem imagem</span>
+                        <% } %></td></tr>
+
+                <tr> <td>valor: <br>
+                    <%= compra.valor_unitario %> reais /unidade</td></tr>
+                <tr> <td><%= compra.quantidade %> unidades</td></tr>
+                <tr> <td>total: <br>R$: <%= compra.valor_total %></td></tr>
+                <tr> <td> <div style="display: flex;text-align: justify;">
+                    Descrição: Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit cupiditate rem, non mollitia itaque hic ad ducimus pariatur eveniet! Pariatur molestiae non reprehenderit, nisi placeat est quam iste sed totam! <%= compra.descricao %>
+                </div></td></tr>
+                <tr> <td>   <% if (endereco) { %>
+                    <div>
+                        <p><%=endereco.rua %></p>
+                        <p><%=endereco.numero %></p>
+                        <p><%=endereco.complemento %></p>
+                        </div> 
+                        <% } %> </td></tr>
+        
+                    
+                       
+        <tr><td>  <% if (compra.estado=='nao confirmado' ) { %>
+            <div style="margin: 20px;" >
+                <button style="background-color: orangered;"><a href='/compra/selecionarEndereco/<%= compra.id_vendas %>'>selecionar
+                    endereco</a></button>
+        
+        <div>            
+            <button><a href='/compra/confirmar/<%= compra.id_vendas %>'>confirmar</a></button>
+            <button><a href="/compra/editar/<%= compra.id_vendas %>">editar</a></button>
+            <button><a href="/compra/deletar/<%= compra.id_vendas %>"> cancelar </a></button>
+        </div>
+
+        <% } else { %>
+                <h3 class="estado-<%= compra.estado %>">
+                    <%= compra.estado %>
+                </h3>
+                <button><a href="/compras/listar">voltar</a></button>
+
+
+        <% } %>
+</td></tr>
+
+        
+    </form>
+    </div>
+    </table>
+
+
+
+
+</body>
+
+<script src="/script/script.js"></script>
+
+</html>

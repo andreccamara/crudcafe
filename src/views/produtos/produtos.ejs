@@ -15,10 +15,11 @@
     <% if(nome) { %>
     <p>Seja bem-vindo(a), <%= nome %>!</p>
     <% } %>
-
     
+    <% if(erro) { %>
+        <p> <%= erro %>!</p>
+        <% } %>
     <!-- navbar -->
-
     <nav class="navbar">
         <!-- Botão Hambúrguer -->
         <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
@@ -40,37 +41,38 @@
         <caption>PRODUTOS:</caption>
 
         <tr>
-            <th>Número</th>
+            <th class="numero">Número</th>
             <th>Nome</th>
             <th>Descrição</th>
             <th>Valor</th>
             <th>Imagem</th>
-            <th>Ações</th>
         </tr>
         <% produtos.forEach(item=> { %>
             <tr>
-                <td>
+                <td class="numero">
                     <%= item.id_produtos %>
                 </td>
                 <td>
-                    <%= item.nome %>
+                <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'><%= item.nome %></a>
+
+                
                 </td>
                 <td>
-                    <%= item.descricao %>
+                    <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'><%= item.descricao %> </a>
                 </td>
                 <td>
-                    R$: <%= item.valor.toFixed(2) %>
+                    <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'> R$: <%= item.valor.toFixed(2) %> </a>
                 </td>
                 <td>
+                    <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'>
                     <% if (item.imagem) { %>
                         <img src="/uploads/<%= item.imagem %>" class="produto-imagem" alt="produto">
                         <% } else { %>
-                            <span>Sem imagem</span>
+                            <span>imagem do produto <%= item.nome %></span>
                             <% } %>
+                            </a>
                 </td>
-                <td>
-                    <a href='/compra/form/<%= item.id_produtos %>'><button>comprar</button></a>
-                </td>
+         
             </tr>
             <% }) %>
     </table>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form produto</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+
+</head>
+
+<body class="light-theme">
+    <h1>CAFETERIA DO DEDE</h1>
+
+    <!-- navbar -->
+    <nav class="navbar">
+        <!-- Botão Hambúrguer -->
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Links da Navbar -->
+        <div class="navbar-links">
+            <button class="logout"><a href="/logout">Sair</a></button>
+            <button id="theme-toggle">Dark Mode</button>
+            <button><a href="/main2">Produtos</a></button>
+            <button><a href="/compras/listar">Minhas Compras</a></button>
+            <!-- Imagem do logo -->
+            <img class="logo-imagem" src="/uploads/cafelogo.jpg" alt="logo de café">
+        </div>
+    </nav>
+
+
+    <div class="ver-pedido" style="display:list-item">
+
+        <div>
+    <p>Meu Pedido:</p>
+
+            <p><strong>
+
+                    <%= compra.nome %>
+                </strong>
+            </p>
+                        <p>
+                            <%= compra.quantidade %> unidades
+                        </p>
+
+                        <p>total: <br>R$: <%= compra.valor_total %></p>
+           </div>
+<button>   <a href='/endereco/formCadastrar'>cadastrar novo
+            endereco</a>
+        </button>
+        
+        <table class="table-container">
+            <caption>Selecione o Endereco:</caption>
+
+            <tr>
+
+                <th>cidade</th>
+                <th>rua</th>
+                <th>nº</th>
+                <th>complemento</th>
+                <th>selecionar</th>
+            </tr>
+
+            <% endereco_usuario.forEach(item=> { %>
+                <tr>
+                    <td>
+                        <%= item.cidade %>
+                    </td>
+                    
+                    <td>
+                        <%=item.rua %>
+
+                    </td>
+
+                    <td>
+                        <%= item.numero %>
+                    </td>
+
+                    <td>
+                        <%= item.complemento %>
+                    </td>
+
+                    <td>
+                        <div id="acao-venda" style="display: flex; justify-content: center;">
+                            <button>
+                                <a href="/compra/EnderecoConfirmar/<%= compra.id_vendas %>/<%= item.id_endereco %>">selecionar
+                                    endereco</a>
+                            </button>
+
+                        </div>
+                    </td>
+                    
+                </tr>
+                <% }) %>
+        </table>
+
+
+    </div>
+
+
+
+
+</body>
+
+<script src="/script/script.js"></script>
+
+</html>

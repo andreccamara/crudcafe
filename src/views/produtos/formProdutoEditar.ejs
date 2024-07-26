@@ -32,7 +32,6 @@
 <div class="form-container">
     <form action="/produto/alterar/<%= produtos.id_produtos%>" method="post" enctype="multipart/form-data">
 
-        
         <label for="nome">Nome:</label>
         <input type="text" name="nome" value="<%= produtos.nome %>" required>
 
@@ -41,12 +40,10 @@
 
         <label for="valor">Valor:</label>
         <input type="number" name="valor" step="0.01" value="<%= produtos.valor %>" required>
-
         
         <label for="imagem">Imagem:</label>
-        <input type="file" name="imagem" accept="image/*">
-
-        <input type="submit" value="Cadastrar">
+        <input type="file" name="imagem" accept="image/*" >
+        <input type="submit" value="Editar">
     </form></div>
 </body>
 <script src="/script/script.js"></script>

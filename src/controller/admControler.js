@@ -52,14 +52,14 @@ module.exports = {
     listarTodasAsCompras: async (req, res) => {
         const lista_de_compras = await compras.buscarTodasAsCompras()
         const nome = req.session.nome
-        res.render('compras/todasCompras', { lista_de_compras, nome })
+        res.render('administracao/todasCompras', { lista_de_compras, nome })
     },
 
 
     formEstadoCompra: async (req, res) => {
         let id_venda = req.params.id_venda;
         try {
-            const compra = await compras.formEstadoDaCompra(id_venda);
+            const compra = await compras.verCompra(id_venda);
             res.render('compras/formCompraEstado', { compra });
         }
         catch (error) {

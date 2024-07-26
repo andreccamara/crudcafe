@@ -25,11 +25,11 @@ module.exports = {
                 } else if (usuario.categoria == 3) {
                     res.redirect('main')
                 } else {
-                    let erro = 'Usuário errado';
+                    let erro = 'categoria desconhecida';
                     res.render('home2', { erro: erro });
                 }
             } else {
-                let erro = 'Usuário não encontrado';
+                let erro = 'Email ou senha incorretos';
                 res.render('home2', { erro: erro });
             }
         } catch (error) {
@@ -59,7 +59,7 @@ module.exports = {
             // aqui se faz uma pesquisa sql para pegar informações de todos os produtos
             const produtos = await produto.buscarProdutos();
             // aqui devolve-se as informações para o frontend que as renderizará
-            res.render('administracao', { nome: req.session.nome, produtos, categoria: req.session.categoria });
+            res.render('administracao/administracao', { nome: req.session.nome, produtos, categoria: req.session.categoria });
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
             res.status(500).send('Erro ao carregar a página principal.');
@@ -94,7 +94,7 @@ module.exports = {
         res.render('formCadastrarUsuario', { mensagem: null});
     },
     formCadastrarAdministrador: (_, res) => {
-        res.render('formCadastrarAdministrador', { mensagem: null});
+        res.render('administracao/formCadastrarAdministrador', { mensagem: null});
     },
 
     cadastrarusuario: async (req, res) => {
@@ -121,11 +121,11 @@ module.exports = {
             if (resultado.sucesso) {
                 res.redirect('/main'); // Redireciona para a página de login após o registro bem-sucedido
             } else {
-                res.render('formCadastrarAdministrador', { mensagem: resultado.mensagem }); // Renderiza a página de registro com a mensagem de erro
+                res.render('administracao/formCadastrarAdministrador', { mensagem: resultado.mensagem }); // Renderiza a página de registro com a mensagem de erro
             }
         } catch (error) {
             console.error('Erro ao registrar administrador:', error);
-            res.render('formCadastrarAdministrador', { mensagem: 'Erro ao registrar administrador.' });
+            res.render('administracao/formCadastrarAdministrador', { mensagem: 'Erro ao registrar administrador.' });
         }
     },
 //renderizar a pagina de catalogo de produtos para os compradores 
@@ -134,11 +134,22 @@ module.exports = {
             // pesquisa no model todos os produtos e retorna o resultado
             const produtos = await produto.buscarProdutos()
             // entrega as informações para o frontend ejs
-            res.render('produtos/produtos', { nome: req.session.nome, produtos });
+            res.render('produtos/produtos', { nome: req.session.nome, produtos, erro: null });
+        } catch (error) {
+            console.error('Erro ao buscar produtos:', error);
+            res.status(500).send('Erro ao carregar a página principal.');
+        }
+    },
+    main2erro: async (req, res) => {
+        try {
+            // pesquisa no model todos os produtos e retorna o resultado
+            const produtos = await produto.buscarProdutos()
+            const erro = req.params.erro
+            // entrega as informações para o frontend ejs
+            res.render('produtos/produtos', { nome: req.session.nome, produtos, erro });
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
             res.status(500).send('Erro ao carregar a página principal.');
         }
     }
-
 }
