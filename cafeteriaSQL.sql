@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/07/2024 às 00:26
+-- Tempo de geração: 29/07/2024 às 17:05
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -30,6 +30,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `categorias` (
   `id` int(1) DEFAULT NULL,
   `cargo` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `enderecos`
+--
+
+CREATE TABLE `enderecos` (
+  `id_endereco` int(11) NOT NULL,
+  `CEP` varchar(10) DEFAULT NULL,
+  `estado` varchar(45) NOT NULL,
+  `cidade` varchar(45) NOT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `rua` varchar(45) NOT NULL,
+  `numero` varchar(45) NOT NULL,
+  `complemento` varchar(45) DEFAULT NULL,
+  `id_usuarios` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -73,12 +91,21 @@ CREATE TABLE `vendas` (
   `valor_unitario` float DEFAULT NULL,
   `id_usuarios` int(11) NOT NULL,
   `id_produtos` int(11) NOT NULL,
-  `estado` varchar(45) DEFAULT 'nao confirmado'
+  `estado` varchar(45) DEFAULT 'nao confirmado',
+  `data` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_endereco` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `enderecos`
+--
+ALTER TABLE `enderecos`
+  ADD PRIMARY KEY (`id_endereco`),
+  ADD KEY `fk_id_usuarios` (`id_usuarios`);
 
 --
 -- Índices de tabela `produtos`
@@ -98,11 +125,18 @@ ALTER TABLE `usuarios`
 ALTER TABLE `vendas`
   ADD PRIMARY KEY (`id_vendas`),
   ADD KEY `fk_vendas_usuarios1` (`id_usuarios`),
-  ADD KEY `fk_vendas_produtos1` (`id_produtos`) USING BTREE;
+  ADD KEY `fk_vendas_produtos1` (`id_produtos`) USING BTREE,
+  ADD KEY `fk_id_endereco` (`id_endereco`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `enderecos`
+--
+ALTER TABLE `enderecos`
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -127,9 +161,16 @@ ALTER TABLE `vendas`
 --
 
 --
+-- Restrições para tabelas `enderecos`
+--
+ALTER TABLE `enderecos`
+  ADD CONSTRAINT `fk_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`);
+
+--
 -- Restrições para tabelas `vendas`
 --
 ALTER TABLE `vendas`
+  ADD CONSTRAINT `fk_id_endereco` FOREIGN KEY (`id_endereco`) REFERENCES `enderecos` (`id_endereco`),
   ADD CONSTRAINT `fk_vendas_produtos1` FOREIGN KEY (`id_produtos`) REFERENCES `produtos` (`id_produtos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_vendas_usuarios1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;

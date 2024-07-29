@@ -4,6 +4,9 @@
 
 Este projeto é um sistema de gerenciamento de compras para uma cafeteria, desenvolvido para permitir o cadastro, visualização, edição e exclusão de produtos e vendas. O objetivo principal é facilitar a administração do estoque e das vendas da cafeteria, garantindo uma gestão eficiente e precisa dos dados.
 
+
+<img src="src\uploads\login.png">
+
 ## Tecnologias Utilizadas
 
 - **Frontend:**
