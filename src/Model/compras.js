@@ -95,7 +95,7 @@ module.exports = {
     buscarCompras: (id_usuario) => {
         return new Promise((resolve, reject) => {
             console.log(id_usuario)
-            conexao.query("SELECT *, DATE_FORMAT(data, '%d/%m/%Y') AS data_formatada FROM vendas v join produtos p on v.id_produtos=p.id_produtos where id_usuarios = ?", [id_usuario], (error, results) => {
+            conexao.query("SELECT *, DATE_FORMAT(data, '%d/%m/%Y') AS data_formatada FROM vendas v left join produtos p on v.id_produtos=p.id_produtos where id_usuarios = ?", [id_usuario], (error, results) => {
                 if (error) {
                     console.log(error)
                     reject(new Error('Something went wrong'));

@@ -50,6 +50,7 @@ x: async (req, res) => {
         let id_usuario = req.session.id_usuario
         const lista_de_compras = await compras.buscarCompras(id_usuario)
         const nome = req.session.nome
+        console.log(lista_de_compras)
         res.render('compras/compras', { lista_de_compras, nome })
     },
 

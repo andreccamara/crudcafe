@@ -61,10 +61,10 @@
                     <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'><%= item.descricao %> </a>
                 </td>
                 <td>
-                    <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'> R$: <%= item.valor.toFixed(2) %> </a>
+                    <a style="text-decoration:none;" href='/compra/form/<%= item.id_produtos %>'> R$: <%= item.valor.toFixed(2) %> </a>
                 </td>
                 <td>
-                    <a style="text-decoration:none ;" href='/compra/form/<%= item.id_produtos %>'>
+                    <a style="text-decoration: none;" href='/compra/form/<%= item.id_produtos %>'>
                     <% if (item.imagem) { %>
                         <img src="/uploads/<%= item.imagem %>" class="produto-imagem" alt="produto">
                         <% } else { %>
